@@ -2,3 +2,10 @@ language: node_js
 node_js: node
 services:
 - mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: SwCpWdd2MyKXLPgXOSK/5ki8jtleaSxnLlAd4aUQy4NlBeQlgNK38NlbuTQUxtB+CrAaQlRJ/rk+lxLm18PnoBAD2bzh4GAu26XfwL0Sq5jseiJrKLkT0blkbsAkWENQn5tr69ekDrUPgZKcxbLNqyl8Ul4pYB0taI3s7p7su6i2iFKtVVwd1DCG+XHI9xlRpcWb3SJmmAxF2OAK+7IKQgfdo0eelG53Uhzgt5/Vs7INNRoBjwQVrWTfsv+6KP1iHU7VAUImoV5i5wuzr1dZkAoNrU4YVBvca576hTNa2Yema4V+pT4n0Pcai54HI4hD45kG2xagyXN/4y3AtUrzKll5Q22H7DUyJ1W1Bws5hEaWKT4KAPmtLYBY0krfKKV01Iaoewj16noz5ADCz0jkte4v3JDD+jyNKtn7pF9ijFO/rUZMDvfwQk7Ab3ggcK9aHNTYQlxFS5E0v4GO2kxxksiT20vSH9dcU9wNK3bQR06otRZJMieoaX5F+LROEPnzbBVxCydIYbTWFBAVFTzY+bFpIZULUpcofuC2OgqOFTIBupzDd+VafpgsCpYEJMf5C6gUyEPJO/F+7847FKaUTU6gf7oxxwKD61465qRVU6p9r5jjyxGC6DaJtZDO6QR0OH/4uPmB+bzPcv1fqPVywEke2aEB8qoJ3xLVTgHTMyA=
+  app: mybrary-app
+  on:
+    repo: nateusmc/mybrary-fullstack
