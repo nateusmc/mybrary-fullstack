@@ -40,6 +40,7 @@ let server;
 function runServer() {
   return new Promise((resolve, reject) => {
     mongoose.connect(DATABASE_URL, { useMongoClient: true }, err => {
+      console.log(DATABASE_URL);
       if (err) {
         return reject(err);
       }
