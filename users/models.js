@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
+
+
 const UserSchema = mongoose.Schema({
   firstName: {
     type: String,
