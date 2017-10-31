@@ -6,7 +6,17 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const UserSchema = mongoose.Schema({
-  username: {
+  firstName: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  lastName: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  email: {
     type: String,
     required: true,
     unique: true
@@ -14,11 +24,19 @@ const UserSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  confirmPassword: {
+    type: String,
+    required: true
   }
 });
 
 UserSchema.methods.apiRepr = function () {
-  return { username: this.username };
+  return {
+    firstName: this.firstName,
+    lastName: this.lastName,
+    email: this.email
+  };
 };
 
 UserSchema.methods.validatePassword = function (password) {

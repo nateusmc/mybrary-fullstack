@@ -15,7 +15,7 @@
 	<h2>API Client</h2>
 	<ul id="nav">
 		<li> </li><a href="" class="viewSearch">Search</a> |
-		<li> </li><a href="" class="viewSignup">SignUp</a> |
+		<li> </li><a href="" class="viewRegister">Register</a> |
 		<li> </li><a href="" class="viewLogin">Login</a> |
 		<li> </li><a href="" class="viewCreate">Create</a> |
 	</ul>
@@ -37,18 +37,31 @@
 		<a href="" class="viewCreate">Insert One</a>
 	</form>
 
-	<form id="signup" class="view">
+	<form id="register" class="view">
 		<fieldset>
-			<legend>Signup</legend>
-			<div>
-				<label for="username">Username</label>
-				<input type="text" id="username" name="username" value="bobuser">
+			<legend>Register</legend>
+      <div>
+				<label for="first-name">First Name</label>
+				<input type="text" id="first-name" name="firstname" value="First Name">
+			</div>
+      <div>
+				<label for="last-name">Last Name</label>
+				<input type="text" id="last-name" name="lastname" value="Last Name">
 			</div>
 			<div>
+        <div>
+				<label for="email">Email</label>
+				<input type="email" id="email" name="email" value="email">
+			</div>
+     <div>
 				<label for="password">Password</label>
-				<input type="password" id="password" name="password" value="knockknock">
+				<input type="password" id="password" name="password" value="Password">
 			</div>
-			<button type="submit">Signup</button> Already have an account? <a href="" class="viewLogin">Login</a>
+			<div>
+				<label for="c-password">Confirm Password</label>
+				<input type="password" id="c-password" name="c-password" value="Confirm Password">
+			</div>
+			<button type="submit">Register</button> Already have an account? <a href="#" class="viewLogin">Login</a>
 		</fieldset>
 	</form>
 
@@ -56,14 +69,14 @@
 		<fieldset>
 			<legend>Login</legend>
 			<div>
-				<label for="username">Username</label>
-				<input type="text" id="username" name="username" value="bobuser">
+				<label for="email">Email</label>
+				<input type="text" id="email" name="email" value="bobuser">
 			</div>
 			<div>
 				<label for="password">Password</label>
 				<input type="password" id="password" name="password" value="knockknock">
 			</div>
-			<button type="submit">Login</button> Don't have an account? <a href="" class="viewSignup">Signup</a>
+			<button type="submit">Login</button> Don't have an account? <a href="#" class="viewRegister">Register</a>
 		</fieldset>
 	</form>
 
@@ -107,7 +120,6 @@
 		window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')
 	</script>
 
-	<!-- <script src="js/ajax.js"></script> -->
 	<script src="js/fetch.js"></script>
 	<script src="js/render.js"></script>
 	<script src="js/handle.js"></script>

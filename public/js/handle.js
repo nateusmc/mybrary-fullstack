@@ -7,17 +7,29 @@
  */
 
 var handle = {
-  signup: function (event) {
+  register: function (event) {
     event.preventDefault();
-    const state = event.data;
+    const state  = event.data;
     const el = $(event.target);
-    const username = el.find('[name=username]').val().trim();
+    const firstName = el.find('[name=firstname]').val().trim();
+    const lastName = el.find('[name=lastname]').val().trim();
+    const email = el.find('[name=email]').val().trim();
     const password = el.find('[name=password]').val().trim();
+    const confirmPassword = el.find('[name=c-password]').val().trim();
+    console.log(firstName);
+    console.log(lastName);
+    console.log(email);
+    console.log(password);
+    console.log(confirmPassword);
     el.trigger('reset');
 
-    api.signup(username, password)
+    if (confirmPassword !== password) {
+      alert('Confirm Password and Password must match');
+    }
+
+    api.register(email, password)
       .then(() => {
-        state.view = 'login';
+        state.view = 'register';
         render.page(state);
       }).catch(err => {
         if (err.reason === 'ValidationError') {
@@ -32,10 +44,10 @@ var handle = {
     event.preventDefault();
     const state = event.data;
     const el = $(event.target);
-    const username = el.find('[name=username]').val().trim();
+    const email = el.find('[name=email]').val().trim();
     const password = el.find('[name=password]').val().trim();
     state.action = 'getToken';
-    api.login(username, password)
+    api.login(email, password)
       .then(response => {
         state.action = null;
         state.token = response.authToken;
@@ -134,7 +146,7 @@ var handle = {
       }).catch(err => {
         if (err.status === 401) {
           state.backTo = state.view;
-          state.view = 'signup';
+          state.view = 'register';
           render.page(state);
         }
         console.error('ERROR:', err);
@@ -160,7 +172,7 @@ var handle = {
       }).catch(err => {
         if (err.status === 401) {
           state.backTo = state.view;
-          state.view = 'signup';
+          state.view = 'register';
           render.page(state);
         }
         console.error('ERROR:', err);
@@ -198,7 +210,7 @@ var handle = {
       }).catch(err => {
         if (err.status === 401) {
           state.backTo = state.view;
-          state.view = 'signup';
+          state.view = 'register';
           render.page(state);
         }
         console.error('ERROR:', err);
@@ -216,10 +228,10 @@ var handle = {
     state.view = 'login';
     render.page(state);
   },
-  viewSignup: function (event) {
+  viewRegister: function (event) {
     event.preventDefault();
     const state = event.data;
-    state.view = 'signup';
+    state.view = 'register';
     render.page(state);
   },
   viewSearch: function (event) {

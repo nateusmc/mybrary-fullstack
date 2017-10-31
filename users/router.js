@@ -10,7 +10,7 @@ const router = express.Router();
 const jsonParser = bodyParser.json();
 
 router.post('/', jsonParser, (req, res) => {
-  const requiredFields = ['username', 'password'];
+  const requiredFields = ['email', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
 
   if (missingField) {
@@ -22,7 +22,7 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-  const stringFields = ['username', 'password'];
+  const stringFields = ['email', 'password'];
   const nonStringField = stringFields.find(
     field => field in req.body && typeof req.body[field] !== 'string'
   );
@@ -36,7 +36,7 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-  const explicityTrimmedFields = ['username', 'password'];
+  const explicityTrimmedFields = ['email', 'password'];
   const nonTrimmedField = explicityTrimmedFields.find(
     field => req.body[field].trim() !== req.body[field]
   );
@@ -51,7 +51,7 @@ router.post('/', jsonParser, (req, res) => {
   }
 
   const sizedFields = {
-    username: { min: 1 },
+    email: { min: 1 },
     password: { min: 10, max: 72 }
   };
   const tooSmallField = Object.keys(sizedFields).find(field =>
@@ -74,23 +74,23 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-  let { username, password } = req.body;
+  let { email, password } = req.body;
 
-  return User.find({ username })
+  return User.find({ email })
     .count()
     .then(count => {
       if (count > 0) {
         return Promise.reject({
           code: 422,
           reason: 'ValidationError',
-          message: 'Username already taken',
-          location: 'username'
+          message: 'Email already taken',
+          location: 'email'
         });
       }
       return User.hashPassword(password);
     })
     .then(hash => {
-      return User.create({ username, password: hash });
+      return User.create({ email, password: hash });
     })
     .then(user => {
       return res.status(201).json(user.apiRepr());
