@@ -43,10 +43,12 @@ function normalizeResponseErrors(res) {
 }
 
 var api = {
-  signup: function (username, password) {
+  register: function (firstName, lastName, email, password) {
     const url = buildUrl(USERS_URL);
     const body = {
-      username: username,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
       password: password
     };
 
@@ -60,9 +62,9 @@ var api = {
     }).then(normalizeResponseErrors)
       .then(res => res.json());
   },
-  login: function (username, password) {
+  login: function (email, password) {
     const url = buildUrl(LOGIN_URL);
-    const base64Encoded = window.btoa(`${username}:${password}`);
+    const base64Encoded = window.btoa(`${email}:${password}`);
 
     return fetch(url, {
       method: 'POST',

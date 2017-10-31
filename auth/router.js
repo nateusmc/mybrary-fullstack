@@ -7,9 +7,9 @@ const config = require('../config');
 
 const router = express.Router();
 
-const createAuthToken = function(user) {
-  return jwt.sign({ user }, config.JWT_SECRET, {
-    subject: user.username,
+const createAuthToken = function(email) {
+  return jwt.sign({ email }, config.JWT_SECRET, {
+    subject: email.email,
     expiresIn: config.JWT_EXPIRY,
     // algorithm: 'HS256'
   });
