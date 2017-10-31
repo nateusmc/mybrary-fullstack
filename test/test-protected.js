@@ -15,7 +15,7 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe.skip('Protected endpoint', function () {
-  const username = 'exampleUser';
+  const email = 'exampleEmail';
   const password = 'examplePass';
 
   before(function () {
@@ -28,7 +28,7 @@ describe.skip('Protected endpoint', function () {
 
   beforeEach(function () {
     return User.hashPassword(password).then(password =>
-      User.create({ username, password })
+      User.create({ email, password })
     );
   });
 
@@ -56,7 +56,7 @@ describe.skip('Protected endpoint', function () {
 
     it('Should reject requests with an invalid token', function () {
       const token = jwt.sign(
-        { username },
+        { email },
         'wrongSecret',
         {
           // algorithm: 'HS256',
@@ -83,13 +83,13 @@ describe.skip('Protected endpoint', function () {
     it('Should reject requests with an expired token', function () {
       const token = jwt.sign(
         {
-          user: { username },
+          user: { email },
           exp: Math.floor(Date.now() / 1000) - 10 // Expired ten seconds ago
         },
         JWT_SECRET,
         {
           // algorithm: 'HS256',
-          subject: username
+          subject: email
         }
       );
 
@@ -112,12 +112,12 @@ describe.skip('Protected endpoint', function () {
     it('Should send protected data', function () {
       const token = jwt.sign(
         {
-          user: { username }
+          user: { email }
         },
         JWT_SECRET,
         {
           // algorithm: 'HS256',
-          subject: username,
+          subject: email,
           expiresIn: '7d'
         }
       );
