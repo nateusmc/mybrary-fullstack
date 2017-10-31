@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
+
+
 const UserSchema = mongoose.Schema({
   firstName: {
     type: String,
@@ -25,9 +27,10 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  confirmPassword: {
-    type: String,
-    required: true
+  bookIds: {
+    type: Array,
+    required: false,
+    uniqie: false
   }
 });
 

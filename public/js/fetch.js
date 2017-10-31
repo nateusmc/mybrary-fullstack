@@ -15,13 +15,25 @@ const ITEMS_URL = '/api/things/';
 const USERS_URL = '/api/users/';
 const LOGIN_URL = '/api/auth/login/';
 const REFRESH_URL = '/api/auth/refresh/';
+const BOOKS_API_URL = '/books/v1/volumes?key=AIzaSyCLTW5L2hLYTbWfueyDRzzwt9vQead4PP0';
 
 function buildUrl(path, query) {
-  var url = new URL(path, window.location.origin);
+  let url = new URL(path, window.location.origin);
   if (query) {
     Object.keys(query).forEach(key => url.searchParams.append(key, query[key]));
   }
   return url;
+}
+
+function buildGoogleUrl(path, query) {
+  let googUrl = new URL(path, 'https://www.googleapis.com');
+  if (query) {
+    Object.keys(query).forEach(key => 
+      googUrl.searchParams.append(key, query[key]));
+  }
+  console.log(googUrl);
+  console.log(query);
+  return googUrl;
 }
 
 function normalizeResponseErrors(res) {
@@ -86,9 +98,8 @@ var api = {
     }).then(normalizeResponseErrors)
       .then(res => res.json());
   },  
-  search: function (query) {
-    const url = buildUrl(ITEMS_URL, query);
-
+  searchBooks: function (query) {
+    const url = buildGoogleUrl(BOOKS_API_URL, query);
     return fetch(url, {
       method: 'GET',
       headers: {
@@ -150,4 +161,15 @@ var api = {
   }
 };
 
+const query = {
+  q: 'flowers'
+};
+api.searchBooks(query);
 
+//Google API Json
+//id
+//title
+//author
+//description
+//thumbnail
+//rating
