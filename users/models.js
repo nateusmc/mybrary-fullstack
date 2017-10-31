@@ -24,6 +24,11 @@ const UserSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  bookIds: {
+    type: Array,
+    required: false,
+    uniqie: false
   }
 });
 
