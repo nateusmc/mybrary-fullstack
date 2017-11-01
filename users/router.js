@@ -8,7 +8,6 @@ const { User } = require('./models');
 const router = express.Router();
 
 const jsonParser = bodyParser.json();
-
 router.post('/', jsonParser, (req, res) => {
   const requiredFields = ['firstName', 'lastName', 'email', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
@@ -103,6 +102,11 @@ router.post('/', jsonParser, (req, res) => {
       console.log(err);
       res.status(500).json({ code: 500, message: 'Internal server error' });
     });
+});
+
+router.put('/:id', (req, res) => {
+  User.findById(req.params.id)
+    .then(user => res.send(user.apiRepr()));
 });
 
 

@@ -49,9 +49,12 @@ var handle = {
     state.action = 'getToken';
     api.login(email, password)
       .then(response => {
+        console.log(response);
         state.action = null;
         state.token = response.authToken;
+        state.userId = response.id;
         localStorage.setItem('authToken', state.token);
+        localStorage.setItem('userId', state.userId);
         state.view = (state.backTo) ? state.backTo : 'search';
         render.page(state);
       }).catch(err => {
@@ -182,9 +185,10 @@ var handle = {
     event.preventDefault();
     const state = event.data;
     const el = $(event.target);
-
     const id = el.closest('li').attr('id');
-    api.details(id)
+    const userId = state.userId;
+    console.log('UserID: ', userId, 'BookID: ', id);
+    api.details(userId, id)
       .then(response => {
         state.item = response;
         render.detail(state);
