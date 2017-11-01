@@ -23,9 +23,10 @@ var render = {
 
   },
   results: function (state) {
-    const listItems = state.list.map((item) => {
+    const listItems = state.list.items.map((item) => {
+      // return `<li>${item.volumeInfo.title}</li>`
       return `<li id="${item.id}">
-                <a href="" class="detail">Name: ${item.name}</a>
+                <a href="#" class="detail">Name: ${item.volumeInfo.title}</a>
                 <a href="#" class="remove">X</a>
               </li>`;
     });

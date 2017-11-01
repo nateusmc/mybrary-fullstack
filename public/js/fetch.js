@@ -11,11 +11,12 @@
  * 
  */
 
-const ITEMS_URL = '/api/things/';
+const ITEMS_URL = '/api/';
 const USERS_URL = '/api/users/';
 const LOGIN_URL = '/api/auth/login/';
 const REFRESH_URL = '/api/auth/refresh/';
-const BOOKS_API_URL = '/books/v1/volumes?key=AIzaSyCLTW5L2hLYTbWfueyDRzzwt9vQead4PP0';
+const BOOKS_API_URL = '/books/v1/volumes';
+const GOOGLE_API_KEY = 'AIzaSyCLTW5L2hLYTbWfueyDRzzwt9vQead4PP0'
 
 function buildUrl(path, query) {
   let url = new URL(path, window.location.origin);
@@ -31,8 +32,6 @@ function buildGoogleUrl(path, query) {
     Object.keys(query).forEach(key => 
       googUrl.searchParams.append(key, query[key]));
   }
-  console.log(googUrl);
-  console.log(query);
   return googUrl;
 }
 
@@ -99,6 +98,7 @@ var api = {
       .then(res => res.json());
   },  
   searchBooks: function (query) {
+    query.key = GOOGLE_API_KEY;
     const url = buildGoogleUrl(BOOKS_API_URL, query);
     return fetch(url, {
       method: 'GET',
@@ -161,10 +161,6 @@ var api = {
   }
 };
 
-const query = {
-  q: 'flowers'
-};
-api.searchBooks(query);
 
 //Google API Json
 //id
