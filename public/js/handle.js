@@ -113,14 +113,13 @@ var handle = {
     var query;
     if (name) {
       query = {
-        name: el.find('[name=name]').val()
+        q: el.find('[name=name]').val()
       };
     }
-    api.search(query)
+    api.searchBooks(query)
       .then(response => {
         state.list = response;
         render.results(state);
-
         state.view = 'search';
         render.page(state);
       }).catch(err => {
