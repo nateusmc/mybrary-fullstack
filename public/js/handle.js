@@ -188,10 +188,8 @@ var handle = {
       .then(response => {
         state.item = response;
         render.detail(state);
-
         state.view = 'detail';
         render.page(state);
-
       }).catch(err => {
         state.error = err;
       });
