@@ -11,12 +11,12 @@
  * 
  */
 
-const ITEMS_URL = '/api/';
+const ITEMS_URL = '/api/users/bookIds/';
 const USERS_URL = '/api/users/';
 const LOGIN_URL = '/api/auth/login/';
 const REFRESH_URL = '/api/auth/refresh/';
 const BOOKS_API_URL = '/books/v1/volumes';
-const GOOGLE_API_KEY = 'AIzaSyCLTW5L2hLYTbWfueyDRzzwt9vQead4PP0'
+const GOOGLE_API_KEY = 'AIzaSyCLTW5L2hLYTbWfueyDRzzwt9vQead4PP0';
 
 function buildUrl(path, query) {
   let url = new URL(path, window.location.origin);
@@ -108,14 +108,15 @@ var api = {
     }).then(normalizeResponseErrors)
       .then(res => res.json());
   },
-  details: function (id) {
-    const url = buildUrl(`${ITEMS_URL}${id}`);
+  details: function (userId, bookId) {
+    const url = buildUrl(`${USERS_URL}${userId}`);
 
     return fetch(url, {
-      method: 'GET',
+      method: 'PUT',
       headers: {
         'Accept': 'application/json'
-      }
+      },
+      body: {userId, bookId}
     }).then(normalizeResponseErrors)
       .then(res => res.json());
   },

@@ -33,7 +33,7 @@ jQuery(function ($) {
     item: null,         // currently selected document
     action: null,       // current action, used to track parallel calls
     token: localStorage.getItem('authToken'), // jwt token
-
+    userId: localStorage.getItem('userId'),
     // Simple token refresher
     timer: {            // timer to track token expiration
       status: null,     // current status: ok | warning | expired
