@@ -46,7 +46,7 @@ jQuery(function ($) {
   // Setup all the event listeners, passing STATE and event to handlers
   $('#register').on('submit', state, handle.register);
   $('#login').on('submit', state, handle.login);
-
+  $('#logout').on('click', state, handle.logout);
   $('#create').on('submit', state, handle.create);
   $('#search').on('submit', state, handle.search);
 
