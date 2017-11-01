@@ -30,7 +30,7 @@ const UserSchema = mongoose.Schema({
   bookIds: {
     type: Array,
     required: false,
-    uniqie: false
+    unique: false
   }
 });
 
