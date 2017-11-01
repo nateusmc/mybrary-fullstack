@@ -20,10 +20,14 @@ const jwtAuth = passport.authenticate('jwt', { session: false, failWithError: tr
 
 router.post('/login', basicAuth, (req, res) => {
   const authToken = createAuthToken(req.user.apiRepr());
+  const user = req.user.apiRepr();
+  const userId = user.id;
+
 
   logTokenDate(authToken);
   
-  res.json({ authToken });
+  
+  res.json({ authToken, id: userId });
 });
 
 router.post('/refresh', jwtAuth, (req, res) => {
