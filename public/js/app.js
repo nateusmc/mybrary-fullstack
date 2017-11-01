@@ -34,7 +34,6 @@ jQuery(function ($) {
     action: null,       // current action, used to track parallel calls
     token: localStorage.getItem('authToken'), // jwt token
     userId: localStorage.getItem('userId'),
-
     // Simple token refresher
     timer: {            // timer to track token expiration
       status: null,     // current status: ok | warning | expired
@@ -70,6 +69,6 @@ jQuery(function ($) {
   // call checkExpiry once on document.ready
   handle.checkExpiry(state);
   // poll checkExpiry every few seconds to update status bar
-  // setInterval(() => handle.checkExpiry(state), state.timer.polling);
+  setInterval(() => handle.checkExpiry(state), state.timer.polling);
 
 });

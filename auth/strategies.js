@@ -29,7 +29,6 @@ const basicStrategy = new BasicStrategy((email, password, done) => {
       return done(null, user);
     })
     .catch(err => {
-      console.log(err);
       if (err.reason === 'LoginError') {
         return done(null, false, err);
       }
