@@ -10,7 +10,7 @@ const router = express.Router();
 const jsonParser = bodyParser.json();
 
 router.post('/', jsonParser, (req, res) => {
-  const requiredFields = ['email', 'password'];
+  const requiredFields = ['firstName', 'lastName', 'email', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
 
   if (missingField) {
@@ -22,7 +22,7 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-  const stringFields = ['email', 'password'];
+  const stringFields = ['firstName', 'lastName', 'email', 'password'];
   const nonStringField = stringFields.find(
     field => field in req.body && typeof req.body[field] !== 'string'
   );
@@ -36,7 +36,7 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-  const explicityTrimmedFields = ['email', 'password'];
+  const explicityTrimmedFields = ['firstName', 'lastName', 'email', 'password'];
   const nonTrimmedField = explicityTrimmedFields.find(
     field => req.body[field].trim() !== req.body[field]
   );
@@ -74,8 +74,8 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-  let { email, password } = req.body;
-
+  let { firstName, lastName, email, password } = req.body;
+  
   return User.find({ email })
     .count()
     .then(count => {
@@ -90,7 +90,7 @@ router.post('/', jsonParser, (req, res) => {
       return User.hashPassword(password);
     })
     .then(hash => {
-      return User.create({ email, password: hash });
+      return User.create({ firstName, lastName, email, password: hash });
     })
     .then(user => {
       return res.status(201).json(user.apiRepr());
@@ -99,6 +99,8 @@ router.post('/', jsonParser, (req, res) => {
       if (err.reason === 'ValidationError') {
         return res.status(err.code).json(err);
       }
+      console.log('sometest');
+      console.log(err);
       res.status(500).json({ code: 500, message: 'Internal server error' });
     });
 });
