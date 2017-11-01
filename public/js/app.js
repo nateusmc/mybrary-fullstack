@@ -64,7 +64,7 @@ jQuery(function ($) {
   $('body').on('click', state, handle.refresh);
 
   // start app by triggering a search
-  $('#search').trigger('submit');
+  // $('#search').trigger('submit');
   
   // call checkExpiry once on document.ready
   handle.checkExpiry(state);
