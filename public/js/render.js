@@ -37,5 +37,19 @@ var render = {
       $('#statusbar').css('background-color', 'green').find('.message').text(timer.status);
       break;
     }
-  }
+  },
+  books: function (state) {
+    const listItems = state.items.map((item) => {
+      const bookTitle = item.items[0].volumeInfo.title
+      const bookDescription = item.items[0].volumeInfo.description
+          console.log(item.items[0].volumeInfo.title);
+      
+      return `<li>
+                <a href="#" class="detail">Title: ${bookTitle}</a><br>
+                <a href="#" class="detail">Description: ${bookDescription}</a><br>
+                <a href="#" class="remove">X</a><br>
+              </li>`;
+    });
+    $('#dashboardBooks').empty().append('<ul>').find('ul').append(listItems);
+  },
 };

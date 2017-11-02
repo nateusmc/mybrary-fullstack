@@ -149,21 +149,25 @@ var handle = {
         state.error = err;
       });
   },
-dashboardBooks: function (event) {
-  const userId = state.userId;
-  const token = state.token;
-  console.log(userId);
-  api.findUserById(userId, token)
-  .then(user => {
-    const bookIds = user.bookIds;
-    let bookPromises = [];
-    for (let i = 0; i < bookIds.length; i++) {
-      bookPromises.push(api.getBookById(bookIds[i]))
-    }
-    Promise.all(bookPromises)
-    .then((res) => console.log(res));
-  })
-},
+  dashboardBooks: function (event) {
+    const userId = state.userId;
+    const token = state.token;
+    console.log(userId);
+    api.findUserById(userId, token)
+      .then(user => {
+        const bookIds = user.bookIds;
+        let bookPromises = [];
+        for (let i = 0; i < bookIds.length; i++) {
+          bookPromises.push(api.getBookById(bookIds[i]));
+        }
+        Promise.all(bookPromises)
+          .then((res) => {
+            console.log(res);
+            state.items = res;
+            render.books(state);
+          });
+      });
+  },
   remove: function (event) {
     event.preventDefault();
     const state = event.data;
@@ -215,9 +219,9 @@ dashboardBooks: function (event) {
   viewDashboard: function (event) {
     event.preventDefault();
     const state = event.data;
-      state.view = 'dashboard';
-      handle.dashboardBooks();
-      // console.log(handle.dashboardBooks());
-      render.page(state);
-    }
+    state.view = 'dashboard';
+    handle.dashboardBooks();
+    // console.log(handle.dashboardBooks());
+    render.page(state);
+  }
 };
