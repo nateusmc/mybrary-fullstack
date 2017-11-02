@@ -9,6 +9,10 @@ const router = express.Router();
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false }))
 
+router.get('/:id', (req, res) => {
+User.findById(req.params.id)
+.then(user => res.json(user.apiRepr()));
+}),
 router.post('/', (req, res) => {
   const requiredFields = ['firstName', 'lastName', 'email', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));

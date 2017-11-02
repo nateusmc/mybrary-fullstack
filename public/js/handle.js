@@ -132,7 +132,6 @@ var handle = {
         console.error('ERROR:', err);
       });
   },
-
   details: function (event) {
     event.preventDefault();
     const state = event.data;
@@ -150,7 +149,21 @@ var handle = {
         state.error = err;
       });
   },
-
+dashboardBooks: function (event) {
+  const userId = state.userId;
+  const token = state.token;
+  console.log(userId);
+  api.findUserById(userId, token)
+  .then(user => {
+    const bookIds = user.bookIds;
+    let bookPromises = [];
+    for (let i = 0; i < bookIds.length; i++) {
+      bookPromises.push(api.getBookById(bookIds[i]))
+    }
+    Promise.all(bookPromises)
+    .then((res) => console.log(res));
+  })
+},
   remove: function (event) {
     event.preventDefault();
     const state = event.data;
@@ -202,9 +215,9 @@ var handle = {
   viewDashboard: function (event) {
     event.preventDefault();
     const state = event.data;
-    if (state.list) {
       state.view = 'dashboard';
+      handle.dashboardBooks();
+      // console.log(handle.dashboardBooks());
       render.page(state);
     }
-  }
 };

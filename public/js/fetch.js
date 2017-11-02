@@ -98,6 +98,16 @@ var api = {
     }).then(normalizeResponseErrors)
       .then(res => res.json());
   },
+  getBookById: function (bookId) {
+    const url = `https://www.googleapis.com${BOOKS_API_URL}?q=${bookId}&key=${GOOGLE_API_KEY}`
+    return fetch(url, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(normalizeResponseErrors)
+      .then(res => res.json())
+  },
   details: function (userId, bookId) {
     console.log(JSON.stringify({userId, bookId}))
     console.log(typeof bookId)
@@ -113,6 +123,17 @@ var api = {
       .catch (err => {
         console.log(err)
       })
+  },
+  findUserById: function (userId, token) {
+    const url = buildUrl(`${USERS_URL}${userId}`);
+    return fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json'
+      }
+    }).then(normalizeResponseErrors)
+      .then(res => res.json());
   },
   remove: function (id, token) {
     const url = buildUrl(`${ITEMS_URL}${id}`);
