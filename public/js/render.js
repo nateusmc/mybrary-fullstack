@@ -31,11 +31,6 @@ var render = {
     });
     $('#result').empty().append('<ul>').find('ul').append(listItems);
   },
-  edit: function (state) {
-    const el = $('#edit');
-    const item = state.item;
-    el.find('[name=name]').val(item.name);
-  },
   detail: function (state) {
     const el = $('#detail');
     const item = state.item;

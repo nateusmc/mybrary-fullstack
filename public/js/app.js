@@ -47,16 +47,10 @@ jQuery(function ($) {
   $('#register').on('submit', state, handle.register);
   $('#login').on('submit', state, handle.login);
   $('#logout').on('click', state, handle.logout);
-  $('#create').on('submit', state, handle.create);
   $('#search').on('submit', state, handle.search);
-
-  $('#edit').on('submit', state, handle.update);
-
   $('#result').on('click', '.detail', state, handle.details);
   $('#result').on('click', '.remove', state, handle.remove);
-  $('#detail').on('click', '.edit', state, handle.viewEdit);
   
-  $(document).on('click', '.viewCreate', state, handle.viewCreate);
   $(document).on('click', '.viewLogin', state, handle.viewLogin);
   $(document).on('click', '.viewRegister', state, handle.viewRegister);
   $(document).on('click', '.viewSearch', state, handle.viewSearch);

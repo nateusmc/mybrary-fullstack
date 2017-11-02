@@ -1,15 +1,4 @@
 'use strict';
-/**
- * API: DATA ACCESS LAYER (using fetch())
- * 
- * Primary Job: communicates with API methods. 
- *  
- * Rule of Thumb:
- * - Never manipulation DOM directly
- * - No jquery on this page, use `fetch()` not `$.AJAX()` or `$.getJSON()`
- * - Do not call render methods from this layer
- * 
- */
 
 const ITEMS_URL = '/api/users/bookIds/';
 const USERS_URL = '/api/users/';
@@ -124,34 +113,6 @@ var api = {
       .catch (err => {
         console.log(err)
       })
-  },
-  create: function (document, token) {
-    const url = buildUrl(`${ITEMS_URL}`);
-
-    return fetch(url, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: document ? JSON.stringify(document) : null
-    }).then(normalizeResponseErrors)
-      .then(res => res.json());
-  },  
-  update: function (document, token) {
-    const url = buildUrl(`${ITEMS_URL}${document.id}`);
-
-    return fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: document ? JSON.stringify(document) : null
-    }).then(normalizeResponseErrors)
-      .then(res => res.json());
   },
   remove: function (id, token) {
     const url = buildUrl(`${ITEMS_URL}${id}`);
