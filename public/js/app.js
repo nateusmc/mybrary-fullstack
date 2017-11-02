@@ -32,6 +32,7 @@ jQuery(function ($) {
   $(document).on('click', '.viewLogin', state, handle.viewLogin);
   $(document).on('click', '.viewRegister', state, handle.viewRegister);
   $(document).on('click', '.viewSearch', state, handle.viewSearch);
+  $(document).on('click', '.viewHome', state, handle.viewHome);
 
   $('body').on('click', state, handle.refresh);
 
