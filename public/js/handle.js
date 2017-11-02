@@ -27,7 +27,7 @@ var handle = {
       alert('Confirm Password and Password must match');
     }
 
-    api.register(email, password)
+    api.register(firstName, lastName, email, password, confirmPassword)
       .then(() => {
         state.view = 'register';
         render.page(state);
