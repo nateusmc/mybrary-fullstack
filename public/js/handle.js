@@ -1,10 +1,4 @@
-/* global $, render, api */
 'use strict';
-
-/**
- * 
- * Event Handlers validate input, update STATE and call render methods
- */
 
 var handle = {
   register: function (event) {
@@ -140,57 +134,6 @@ var handle = {
       });
   },
 
-  create: function (event) {
-    event.preventDefault();
-    const state = event.data;
-    const el = $(event.target);
-
-    const document = {
-      name: el.find('[name=name]').val()
-    };
-    api.create(document, state.token)
-      .then(response => {
-        state.item = response;
-        state.list = null; //invalidate cached list results
-        render.detail(state);
-        state.view = 'detail';
-        render.page(state);
-      }).catch(err => {
-        if (err.status === 401) {
-          state.backTo = state.view;
-          state.view = 'register';
-          render.page(state);
-        }
-        console.error('ERROR:', err);
-      });
-  },
-
-  update: function (event) {
-    event.preventDefault();
-    const state = event.data;
-    const el = $(event.target);
-
-    const document = {
-      id: state.item.id,
-      name: el.find('[name=name]').val()
-    };
-    api.update(document, state.token)
-      .then(response => {
-        state.item = response;
-        state.list = null; //invalidate cached list results
-        render.detail(state);
-        state.view = 'detail';
-        render.page(state);
-      }).catch(err => {
-        if (err.status === 401) {
-          state.backTo = state.view;
-          state.view = 'register';
-          render.page(state);
-        }
-        console.error('ERROR:', err);
-      });
-  },
-
   details: function (event) {
     event.preventDefault();
     const state = event.data;
@@ -227,12 +170,6 @@ var handle = {
         console.error('ERROR:', err);
       });
   },
-  viewCreate: function (event) {
-    event.preventDefault();
-    const state = event.data;
-    state.view = 'create';
-    render.page(state);
-  },
   viewLogin: function (event) {
     event.preventDefault();
     const state = event.data;
@@ -254,15 +191,6 @@ var handle = {
     }
     else {
       $('#search').trigger('submit');
-      // handle.search(event);
     }
-  },
-  viewEdit: function (event) {
-    event.preventDefault();
-    const state = event.data;
-    render.edit(state);
-
-    state.view = 'edit';
-    render.page(state);
   }
 };
