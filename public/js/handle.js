@@ -72,7 +72,6 @@ var handle = {
   },
 
   refresh: function (event) {
-    // don't preventDefault on this one!
     const state = event.data;
     const timer = state.timer;
     if (state.action === 'getToken') { return; }
@@ -82,7 +81,7 @@ var handle = {
           state.token = response.authToken;
           localStorage.setItem('authToken', state.token);
         }).catch(err => {
-          state.token = null; // remove expired token
+          state.token = null;
           localStorage.removeItem('authToken');
           console.error('ERROR:', err);
         });
@@ -159,7 +158,7 @@ var handle = {
 
     api.remove(id, state.token)
       .then(() => {
-        state.list = null; //invalidate cached list results
+        state.list = null;
         return handle.search(event);
       }).catch(err => {
         if (err.status === 401) {

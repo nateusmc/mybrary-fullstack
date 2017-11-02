@@ -1,15 +1,4 @@
-/* global $ */
 'use strict';
-/**
- * RENDER METHODS
- * 
- * Primary Job: Direct DOM Manipulation
- * 
- * Rule of Thumb:
- * - Direct DOM manipulation OK
- * - Never update state/store
- * 
- */
 
 var render = {
   page: function (state) {
