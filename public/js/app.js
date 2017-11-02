@@ -69,6 +69,6 @@ jQuery(function ($) {
   // call checkExpiry once on document.ready
   handle.checkExpiry(state);
   // poll checkExpiry every few seconds to update status bar
-  setInterval(() => handle.checkExpiry(state), state.timer.polling);
+  // setInterval(() => handle.checkExpiry(state), state.timer.polling);
 
 });

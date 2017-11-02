@@ -109,16 +109,20 @@ var api = {
       .then(res => res.json());
   },
   details: function (userId, bookId) {
+    console.log(JSON.stringify({userId, bookId}))
+    console.log(typeof bookId)
     const url = buildUrl(`${USERS_URL}${userId}`);
-
     return fetch(url, {
       method: 'PUT',
       headers: {
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: {userId, bookId}
+      body: JSON.stringify({userId, bookId})
     }).then(normalizeResponseErrors)
-      .then(res => res.json());
+      .catch (err => {
+        console.log(err)
+      })
   },
   create: function (document, token) {
     const url = buildUrl(`${ITEMS_URL}`);
@@ -161,12 +165,3 @@ var api = {
       .then(res => res.text());
   }
 };
-
-
-//Google API Json
-//id
-//title
-//author
-//description
-//thumbnail
-//rating
