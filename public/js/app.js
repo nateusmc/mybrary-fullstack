@@ -25,7 +25,7 @@ var state;
 jQuery(function ($) {
   
   state = {
-    demo: true,         // display in demo mode true | false
+    demo: false,         // display in demo mode true | false
     view: null,         // current view: register | login | search | create | details | edit 
     backTo: null,       // previous view to go back to
     query: {},          // search query values
