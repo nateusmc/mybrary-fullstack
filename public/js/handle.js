@@ -191,5 +191,12 @@ var handle = {
     else {
       $('#search').trigger('submit');
     }
+  },
+  viewHome: function (event){
+    const state = event.data;
+    if(state.list) {
+      state.view = null;
+      render.page(state);
+    }
   }
 };
