@@ -98,6 +98,7 @@ var api = {
       .then(res => res.json());
   },  
   searchBooks: function (query) {
+    console.log(query)
     query.key = GOOGLE_API_KEY;
     const url = buildGoogleUrl(BOOKS_API_URL, query);
     return fetch(url, {

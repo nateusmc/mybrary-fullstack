@@ -13,7 +13,7 @@ Features:
 
 -Have a section where users can add and edit notes on each book
 
--Be able to look through list of books and add it to thier 'Mybrary'
+-Be able to look through list of books and add it to their 'Mybrary'
 
 -Being able to filter through added books
 

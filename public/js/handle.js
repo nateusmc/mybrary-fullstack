@@ -123,7 +123,7 @@ var handle = {
     const state = event.data;
     const el = $(event.target);
     const name = el.find('[name=name]').val();
-    var query;
+    var query = {};
     if (name) {
       query = {
         q: el.find('[name=name]').val()
@@ -248,12 +248,14 @@ var handle = {
   viewSearch: function (event) {
     event.preventDefault();
     const state = event.data;
-    if (!state.list) {
-      handle.search(event);
-      return;
+    if (state.list) {
+      state.view = 'search';
+      render.page(state);
     }
-    state.view = 'search';
-    render.page(state);
+    else {
+      $('#search').trigger('submit');
+      // handle.search(event);
+    }
   },
   viewEdit: function (event) {
     event.preventDefault();
