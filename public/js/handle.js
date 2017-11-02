@@ -198,5 +198,13 @@ var handle = {
       state.view = null;
       render.page(state);
     }
+  },
+  viewDashboard: function (event) {
+    event.preventDefault();
+    const state = event.data;
+    if (state.list) {
+      state.view = 'dashboard';
+      render.page(state);
+    }
   }
 };

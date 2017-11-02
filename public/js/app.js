@@ -33,6 +33,7 @@ jQuery(function ($) {
   $(document).on('click', '.viewRegister', state, handle.viewRegister);
   $(document).on('click', '.viewSearch', state, handle.viewSearch);
   $(document).on('click', '.viewHome', state, handle.viewHome);
+  $(document).on('click', '.viewDashboard', state, handle.viewDashboard);
 
   $('body').on('click', state, handle.refresh);
 
