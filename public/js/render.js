@@ -9,7 +9,6 @@ var render = {
       $('.view').hide();
       $('#' + state.view).show();  
     }
-
   },
   results: function (state) {
     const listItems = state.list.items.map((item) => {

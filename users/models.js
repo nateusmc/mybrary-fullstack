@@ -39,7 +39,8 @@ UserSchema.methods.apiRepr = function () {
     firstName: this.firstName,
     lastName: this.lastName,
     email: this.email,
-    id: this._id
+    id: this._id,
+    bookIds: this.bookIds
   };
 };
 
