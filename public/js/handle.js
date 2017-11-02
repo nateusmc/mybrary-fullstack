@@ -67,6 +67,16 @@ var handle = {
       });
   },
 
+  logout: (event) => {
+    const state = event.data;
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userId');
+    state.token = null;
+    state.userId = null;
+    state.view = 'login';
+    render.page(state);
+  },
+
   refresh: function (event) {
     // don't preventDefault on this one!
     const state = event.data;

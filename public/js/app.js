@@ -46,7 +46,7 @@ jQuery(function ($) {
   // Setup all the event listeners, passing STATE and event to handlers
   $('#register').on('submit', state, handle.register);
   $('#login').on('submit', state, handle.login);
-
+  $('#logout').on('click', state, handle.logout);
   $('#create').on('submit', state, handle.create);
   $('#search').on('submit', state, handle.search);
 
@@ -69,6 +69,6 @@ jQuery(function ($) {
   // call checkExpiry once on document.ready
   handle.checkExpiry(state);
   // poll checkExpiry every few seconds to update status bar
-  setInterval(() => handle.checkExpiry(state), state.timer.polling);
+  // setInterval(() => handle.checkExpiry(state), state.timer.polling);
 
 });
