@@ -136,7 +136,7 @@ var api = {
       .then(res => res.json());
   },
   remove: function (id, token) {
-    const url = buildUrl(`${ITEMS_URL}${id}`);
+    const url = buildUrl(`${USERS_URL}${id}`);
 
     return fetch(url, {
       method: 'DELETE',

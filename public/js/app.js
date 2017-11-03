@@ -27,7 +27,7 @@ jQuery(function ($) {
   $('#logout').on('click', state, handle.logout);
   $('#search').on('submit', state, handle.search);
   $('#result').on('click', '.detail', state, handle.details);
-  $('#result').on('click', '.remove', state, handle.remove);
+  $('#remove').on('click', '.remove', state, handle.remove);
   
   $(document).on('click', '.viewLogin', state, handle.viewLogin);
   $(document).on('click', '.viewRegister', state, handle.viewRegister);
