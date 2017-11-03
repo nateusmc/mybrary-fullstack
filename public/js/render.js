@@ -14,7 +14,6 @@ var render = {
     const listItems = state.list.items.map((item) => {
       return `<li id="${item.id}">
                 <a href="#" class="detail">Name: ${item.volumeInfo.title}</a>
-                <a href="#" class="remove">X</a>
               </li>`;
     });
     $('#result').empty().append('<ul>').find('ul').append(listItems);
@@ -47,7 +46,7 @@ var render = {
       return `<li>
                 <a href="#" class="detail">Title: ${bookTitle}</a><br>
                 <a href="#" class="detail">Description: ${bookDescription}</a><br>
-                <a href="#" class="remove">X</a><br>
+                <a href="#" id="remove" class="remove">X</a><br>
               </li>`;
     });
     $('#dashboardBooks').empty().append('<ul>').find('ul').append(listItems);

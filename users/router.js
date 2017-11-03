@@ -7,11 +7,11 @@ const { User } = require('./models');
 
 const router = express.Router();
 router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: false }))
+router.use(bodyParser.urlencoded({ extended: false }));
 
 router.get('/:id', (req, res) => {
-User.findById(req.params.id)
-.then(user => res.json(user.apiRepr()));
+  User.findById(req.params.id)
+    .then(user => res.json(user.apiRepr()));
 }),
 router.post('/', (req, res) => {
   const requiredFields = ['firstName', 'lastName', 'email', 'password'];
@@ -108,26 +108,28 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-User.findByIdAndUpdate(req.params.id, {$push:{bookIds: req.body.bookId}},
-  function(err) {
-  if(err){
-    console.log(err);
-  }
-  else {
-    res.send('everything seems to be working');
-  }
-})
+  User.findByIdAndUpdate(req.params.id, {$push:{bookIds: req.body.bookId}},
+    function(err) {
+      if(err){
+        console.log(err);
+      }
+      else {
+        res.send('everything seems to be working');
+      }
+    });
 });
-//   console.log(req.body);
-//   User.findById(req.params.id)
-//     .then(user => res.send(user.apiRepr()))
-//     User.updateOne({bookIds: req.body.bookId},
-//        {$push:{bookIds: req.body.bookId},
-//        function(err) { 
-//          if(err) { 
-//           console.log("Something wrong when updating data!");
-//        }}})
-// });
+router.delete('/:id', (req, res) => {
+  User.update({'_id':req.params.id}, {$pull:{bookIds: req.body.bookId}},
+    function(err) {
+      if(err){
+        console.log(err);
+      }
+      else {
+        res.send('everything seems to be working');
+      }
+    });
+});
+
 
 
 module.exports = { router };

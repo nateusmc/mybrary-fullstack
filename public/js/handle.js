@@ -178,11 +178,11 @@ var handle = {
     api.remove(id, state.token)
       .then(() => {
         state.list = null;
-        return handle.search(event);
+        return handle.remove(event);
       }).catch(err => {
         if (err.status === 401) {
           state.backTo = state.view;
-          state.view = 'register';
+          state.view = 'dashboard';
           render.page(state);
         }
         console.error('ERROR:', err);
