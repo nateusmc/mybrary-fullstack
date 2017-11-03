@@ -1,8 +1,6 @@
 'use strict';
-
-var state;
+let state;
 jQuery(function ($) {
-  
   state = {
     demo: false,         // display in demo mode true | false
     view: null,         // current view: register | login | search | create | details | edit 
@@ -21,23 +19,18 @@ jQuery(function ($) {
       polling: 1000,    // frequency to checkExpiry in ms
     }
   };
-
   $('#register').on('submit', state, handle.register);
   $('#login').on('submit', state, handle.login);
   $('#logout').on('click', state, handle.logout);
   $('#search').on('submit', state, handle.search);
   $('#result').on('click', '.detail', state, handle.details);
   $(document).on('click', '#remove', state, handle.remove);
-  
   $(document).on('click', '.viewLogin', state, handle.viewLogin);
   $(document).on('click', '.viewRegister', state, handle.viewRegister);
   $(document).on('click', '.viewSearch', state, handle.viewSearch);
   $(document).on('click', '.viewHome', state, handle.viewHome);
   $(document).on('click', '.viewDashboard', state, handle.viewDashboard);
-
   $('body').on('click', state, handle.refresh);
-
   handle.checkExpiry(state);
   // setInterval(() => handle.checkExpiry(state), state.timer.polling);
-
 });

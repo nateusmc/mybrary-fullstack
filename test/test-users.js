@@ -1,37 +1,27 @@
 'use strict';
-
 global.DATABASE_URL = 'mongodb://localhost/jwt-auth-demo-test';
 process.env.NODE_ENV = 'test';
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-
 const { app, runServer, closeServer } = require('../server');
 const { User } = require('../users');
-
 const expect = chai.expect;
-
 chai.use(chaiHttp);
-
 describe('/api/user', function () {
   const email = 'exampleUser';
   const password = 'examplePass';
   const emailB = 'exampleUserB';
   const passwordB = 'examplePassB';
-
   before(function () {
     return runServer();
   });
-
   after(function () {
     return closeServer();
   });
-
   beforeEach(function () { });
-
   afterEach(function () {
     return User.remove({});
   });
-
   describe('/api/users', function () {
     describe('POST', function () {
       it('Should reject users with missing email', function () {
@@ -46,7 +36,6 @@ describe('/api/user', function () {
             if (err instanceof chai.AssertionError) {
               throw err;
             }
-
             const res = err.response;
             expect(res).to.have.status(422);
             expect(res.body.reason).to.equal('ValidationError');
@@ -66,7 +55,6 @@ describe('/api/user', function () {
             if (err instanceof chai.AssertionError) {
               throw err;
             }
-
             const res = err.response;
             expect(res).to.have.status(422);
             expect(res.body.reason).to.equal('ValidationError');
@@ -86,7 +74,6 @@ describe('/api/user', function () {
             if (err instanceof chai.AssertionError) {
               throw err;
             }
-
             const res = err.response;
             expect(res).to.have.status(422);
             expect(res.body.reason).to.equal('ValidationError');
@@ -108,7 +95,6 @@ describe('/api/user', function () {
             if (err instanceof chai.AssertionError) {
               throw err;
             }
-
             const res = err.response;
             expect(res).to.have.status(422);
             expect(res.body.reason).to.equal('ValidationError');
@@ -130,7 +116,6 @@ describe('/api/user', function () {
             if (err instanceof chai.AssertionError) {
               throw err;
             }
-
             const res = err.response;
             expect(res).to.have.status(422);
             expect(res.body.reason).to.equal('ValidationError');
@@ -152,7 +137,6 @@ describe('/api/user', function () {
             if (err instanceof chai.AssertionError) {
               throw err;
             }
-
             const res = err.response;
             expect(res).to.have.status(422);
             expect(res.body.reason).to.equal('ValidationError');
@@ -174,7 +158,6 @@ describe('/api/user', function () {
             if (err instanceof chai.AssertionError) {
               throw err;
             }
-
             const res = err.response;
             expect(res).to.have.status(422);
             expect(res.body.reason).to.equal('ValidationError');
@@ -196,7 +179,6 @@ describe('/api/user', function () {
             if (err instanceof chai.AssertionError) {
               throw err;
             }
-
             const res = err.response;
             expect(res).to.have.status(422);
             expect(res.body.reason).to.equal('ValidationError');
@@ -218,7 +200,6 @@ describe('/api/user', function () {
             if (err instanceof chai.AssertionError) {
               throw err;
             }
-
             const res = err.response;
             expect(res).to.have.status(422);
             expect(res.body.reason).to.equal('ValidationError');
@@ -244,7 +225,6 @@ describe('/api/user', function () {
             if (err instanceof chai.AssertionError) {
               throw err;
             }
-
             const res = err.response;
             expect(res).to.have.status(422);
             expect(res.body.reason).to.equal('ValidationError');

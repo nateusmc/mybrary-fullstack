@@ -1,5 +1,4 @@
 'use strict';
-
 var handle = {
   register: function (event) {
     event.preventDefault();
@@ -10,17 +9,10 @@ var handle = {
     const email = el.find('[name=email]').val().trim();
     const password = el.find('[name=password]').val().trim();
     const confirmPassword = el.find('[name=c-password]').val().trim();
-    console.log(firstName);
-    console.log(lastName);
-    console.log(email);
-    console.log(password);
-    console.log(confirmPassword);
     el.trigger('reset');
-
     if (confirmPassword !== password) {
       alert('Confirm Password and Password must match');
     }
-
     api.register(firstName, lastName, email, password, confirmPassword)
       .then(() => {
         state.view = 'register';
@@ -33,7 +25,6 @@ var handle = {
         }
       });
   },
-
   login: function (event) {
     event.preventDefault();
     const state = event.data;
@@ -59,10 +50,8 @@ var handle = {
         } else {
           console.error('ERROR:', err);
         }
-        
       });
   },
-
   logout: (event) => {
     const state = event.data;
     localStorage.removeItem('authToken');
@@ -72,7 +61,6 @@ var handle = {
     state.view = 'login';
     render.page(state);
   },
-
   refresh: function (event) {
     const state = event.data;
     const timer = state.timer;
@@ -89,7 +77,6 @@ var handle = {
         });
     }
   },
-
   checkExpiry: function (state) {
     const timer = state.timer;
     if (state.token) {
@@ -112,7 +99,6 @@ var handle = {
       render.status(state);
     }
   },
-
   search: function (event) {
     event.preventDefault();
     const state = event.data;
@@ -163,7 +149,6 @@ var handle = {
         }
         Promise.all(bookPromises)
           .then((res) => {
-            console.log(res);
             state.items = res;
             render.books(state);
           });
@@ -223,7 +208,6 @@ var handle = {
     const state = event.data;
     state.view = 'dashboard';
     handle.dashboardBooks();
-    // console.log(handle.dashboardBooks());
     render.page(state);
   }
 };

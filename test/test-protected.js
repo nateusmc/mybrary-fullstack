@@ -1,41 +1,31 @@
 'use strict';
-
 global.DATABASE_URL = 'mongodb://localhost/jwt-auth-demo-test';
 process.env.NODE_ENV = 'test';
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const jwt = require('jsonwebtoken');
-
 const { app, runServer, closeServer } = require('../server');
 const { User } = require('../users');
 const { JWT_SECRET } = require('../config');
-
 const expect = chai.expect;
-
 chai.use(chaiHttp);
-
 describe.skip('Protected endpoint', function () {
   const email = 'exampleEmail';
   const password = 'examplePass';
-
   before(function () {
     return runServer();
   });
-
   after(function () {
     return closeServer();
   });
-
   beforeEach(function () {
     return User.hashPassword(password).then(password =>
       User.create({ email, password })
     );
   });
-
   afterEach(function () {
     return User.remove({});
   });
-
   describe('/api/protected', function () {
     it('Should reject requests with no credentials', function () {
       return chai
@@ -48,12 +38,10 @@ describe.skip('Protected endpoint', function () {
           if (err instanceof chai.AssertionError) {
             throw err;
           }
-
           const res = err.response;
           expect(res).to.have.status(401);
         });
     });
-
     it('Should reject requests with an invalid token', function () {
       const token = jwt.sign(
         { email },
@@ -63,7 +51,6 @@ describe.skip('Protected endpoint', function () {
           expiresIn: '7d'
         }
       );
-
       return chai
         .request(app)
         .get('/api/protected')
@@ -75,7 +62,6 @@ describe.skip('Protected endpoint', function () {
           if (err instanceof chai.AssertionError) {
             throw err;
           }
-
           const res = err.response;
           expect(res).to.have.status(401);
         });
@@ -84,7 +70,7 @@ describe.skip('Protected endpoint', function () {
       const token = jwt.sign(
         {
           user: { email },
-          exp: Math.floor(Date.now() / 1000) - 10 // Expired ten seconds ago
+          exp: Math.floor(Date.now() / 1000) - 10
         },
         JWT_SECRET,
         {
@@ -92,7 +78,6 @@ describe.skip('Protected endpoint', function () {
           subject: email
         }
       );
-
       return chai
         .request(app)
         .get('/api/protected')
@@ -104,7 +89,6 @@ describe.skip('Protected endpoint', function () {
           if (err instanceof chai.AssertionError) {
             throw err;
           }
-
           const res = err.response;
           expect(res).to.have.status(401);
         });
@@ -121,7 +105,6 @@ describe.skip('Protected endpoint', function () {
           expiresIn: '7d'
         }
       );
-
       return chai
         .request(app)
         .get('/api/protected')

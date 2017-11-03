@@ -41,11 +41,10 @@ var render = {
     const listItems = state.items.map((item) => {
       const bookTitle = item.items[0].volumeInfo.title;
       const bookDescription = item.items[0].volumeInfo.description;
-      console.log(item.items[0].volumeInfo.title);
       const bookId = item.items[0].id;
       return `<li id="remove" data-bookId="${bookId}">
-                <a href="#" class="detail">Title: ${bookTitle}</a><br>
-                <a href="#" class="detail">Description: ${bookDescription}</a><br>
+                <div class="detail">Title: ${bookTitle}</div><br>
+                <div class="detail">Description: ${bookDescription}</div><br>
                 <a href=""   class="remove">X</a><br>
               </li>`;
     });

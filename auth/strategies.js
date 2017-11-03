@@ -1,11 +1,8 @@
 'use strict';
-
 const { BasicStrategy } = require('passport-http');
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
-
 const { User } = require('../users/models');
 const { JWT_SECRET } = require('../config');
-
 const basicStrategy = new BasicStrategy((email, password, done) => {
   let user;
   User.findOne({ email: email })
@@ -35,7 +32,6 @@ const basicStrategy = new BasicStrategy((email, password, done) => {
       return done(err, false);
     });
 });
-
 const jwtStrategy = new JwtStrategy(
   {
     secretOrKey: JWT_SECRET,
@@ -46,5 +42,4 @@ const jwtStrategy = new JwtStrategy(
     done(null, payload.user);
   }
 );
-
 module.exports = { basicStrategy, jwtStrategy };
