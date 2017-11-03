@@ -15,7 +15,7 @@ var handle = {
     }
     api.register(firstName, lastName, email, password, confirmPassword)
       .then(() => {
-        state.view = 'register';
+        state.view = 'login';
         render.page(state);
       }).catch(err => {
         if (err.reason === 'ValidationError') {
