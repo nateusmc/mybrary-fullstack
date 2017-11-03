@@ -1,41 +1,31 @@
 'use strict';
-
 global.DATABASE_URL = 'mongodb://localhost/jwt-auth-demo-test';
 process.env.NODE_ENV = 'test';
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const jwt = require('jsonwebtoken');
-
 const { app, runServer, closeServer } = require('../server');
 const { User } = require('../users');
 const { JWT_SECRET } = require('../config');
-
 const expect = chai.expect;
-
 chai.use(chaiHttp);
-
 describe('Auth endpoints', function () {
   const email = 'exampleEmail';
   const password = 'examplePass';
-
   before(function () {
     return runServer();
   });
-
   after(function () {
     return closeServer();
   });
-
   beforeEach(function () {
     return User.hashPassword(password).then(password =>
       User.create({ email, password })
     );
   });
-
   afterEach(function () {
     return User.remove({});
   });
-
   describe('/api/auth/login', function () {
     it('Should reject requests with no credentials', function () {
       return chai
@@ -48,7 +38,6 @@ describe('Auth endpoints', function () {
           if (err instanceof chai.AssertionError) {
             throw err;
           }
-
           const res = err.response;
           expect(res).to.have.status(401);
         });
@@ -65,7 +54,6 @@ describe('Auth endpoints', function () {
           if (err instanceof chai.AssertionError) {
             throw err;
           }
-
           const res = err.response;
           expect(res).to.have.status(401);
         });
@@ -82,7 +70,6 @@ describe('Auth endpoints', function () {
           if (err instanceof chai.AssertionError) {
             throw err;
           }
-
           const res = err.response;
           expect(res).to.have.status(401);
         });
@@ -104,7 +91,6 @@ describe('Auth endpoints', function () {
         });
     });
   });
-
   describe('/api/auth/refresh', function () {
     it('Should reject requests with no credentials', function () {
       return chai
@@ -117,7 +103,6 @@ describe('Auth endpoints', function () {
           if (err instanceof chai.AssertionError) {
             throw err;
           }
-
           const res = err.response;
           expect(res).to.have.status(401);
         });
@@ -131,7 +116,6 @@ describe('Auth endpoints', function () {
           expiresIn: '7d'
         }
       );
-
       return chai
         .request(app)
         .post('/api/auth/refresh')
@@ -143,7 +127,6 @@ describe('Auth endpoints', function () {
           if (err instanceof chai.AssertionError) {
             throw err;
           }
-
           const res = err.response;
           expect(res).to.have.status(401);
         });
@@ -152,7 +135,7 @@ describe('Auth endpoints', function () {
       const token = jwt.sign(
         {
           user: { email },
-          exp: Math.floor(Date.now() / 1000) - 10 // Expired ten seconds ago
+          exp: Math.floor(Date.now() / 1000) - 10
         },
         JWT_SECRET,
         {
@@ -160,7 +143,6 @@ describe('Auth endpoints', function () {
           subject: email
         }
       );
-
       return chai
         .request(app)
         .post('/api/auth/refresh')
@@ -172,7 +154,6 @@ describe('Auth endpoints', function () {
           if (err instanceof chai.AssertionError) {
             throw err;
           }
-
           const res = err.response;
           expect(res).to.have.status(401);
         });
@@ -190,7 +171,6 @@ describe('Auth endpoints', function () {
         }
       );
       const decoded = jwt.decode(token);
-
       return chai
         .request(app)
         .post('/api/auth/refresh')

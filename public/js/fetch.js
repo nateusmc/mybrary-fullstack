@@ -1,12 +1,9 @@
 'use strict';
-
-const ITEMS_URL = '/api/users/bookIds/';
 const USERS_URL = '/api/users/';
 const LOGIN_URL = '/api/auth/login/';
 const REFRESH_URL = '/api/auth/refresh/';
 const BOOKS_API_URL = '/books/v1/volumes';
 const GOOGLE_API_KEY = 'AIzaSyCLTW5L2hLYTbWfueyDRzzwt9vQead4PP0';
-
 function buildUrl(path, query) {
   let url = new URL(path, window.location.origin);
   if (query) {
@@ -14,7 +11,6 @@ function buildUrl(path, query) {
   }
   return url;
 }
-
 function buildGoogleUrl(path, query) {
   let googUrl = new URL(path, 'https://www.googleapis.com');
   if (query) {
@@ -23,17 +19,14 @@ function buildGoogleUrl(path, query) {
   }
   return googUrl;
 }
-
 function normalizeResponseErrors(res) {
   if (!res.ok) {
     if (
       res.headers.has('content-type') &&
       res.headers.get('content-type').startsWith('application/json')
     ) {
-      // It's a nice JSON error returned by us, so decode it
       return res.json().then(err => Promise.reject(err));
     }
-    // It's a less informative error returned by express
     return Promise.reject({
       status: res.status,
       message: res.statusText
@@ -41,7 +34,6 @@ function normalizeResponseErrors(res) {
   }
   return res;
 }
-
 var api = {
   register: function (firstName, lastName, email, password) {
     const url = buildUrl(USERS_URL);
@@ -51,7 +43,6 @@ var api = {
       email: email,
       password: password
     };
-
     return fetch(url, {
       method: 'POST',
       headers: {
@@ -65,7 +56,6 @@ var api = {
   login: function (email, password) {
     const url = buildUrl(LOGIN_URL);
     const base64Encoded = window.btoa(`${email}:${password}`);
-
     return fetch(url, {
       method: 'POST',
       headers: {
@@ -109,8 +99,6 @@ var api = {
       .then(res => res.json())
   },
   details: function (userId, bookId) {
-    console.log(JSON.stringify({userId, bookId}))
-    console.log(typeof bookId)
     const url = buildUrl(`${USERS_URL}${userId}`);
     return fetch(url, {
       method: 'PUT',
@@ -137,7 +125,6 @@ var api = {
   },
   remove: function (userId, bookId, token) {
     const url = buildUrl(`${USERS_URL}${userId}`);
-
     return fetch(url, {
       method: 'DELETE',
       headers: {

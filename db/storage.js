@@ -1,6 +1,5 @@
 'use strict';
 const uuid = require('uuid');
-
 const Storage = {
   addOne: function (item) {
     item.id = item.id || uuid.v4();
@@ -34,7 +33,6 @@ const Storage = {
     delete this.items[id];
   }
 };
-
 module.exports = function (name) {
   const storage = Object.create(Storage);
   storage.name = name;
