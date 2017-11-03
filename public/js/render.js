@@ -40,9 +40,9 @@ var render = {
   },
   books: function (state) {
     const listItems = state.items.map((item) => {
-      const bookTitle = item.items[0].volumeInfo.title
-      const bookDescription = item.items[0].volumeInfo.description
-          console.log(item.items[0].volumeInfo.title);
+      const bookTitle = item.items[0].volumeInfo.title;
+      const bookDescription = item.items[0].volumeInfo.description;
+      console.log(item.items[0].volumeInfo.title);
       
       return `<li>
                 <a href="#" class="detail">Title: ${bookTitle}</a><br>

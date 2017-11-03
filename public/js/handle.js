@@ -51,6 +51,7 @@ var handle = {
         localStorage.setItem('userId', state.userId);
         state.view = (state.backTo) ? state.backTo : 'search';
         render.page(state);
+        document.location.reload();
       }).catch(err => {
         state.action = null;
         if (err.reason === 'ValidationError') {
@@ -58,6 +59,7 @@ var handle = {
         } else {
           console.error('ERROR:', err);
         }
+        
       });
   },
 
@@ -143,7 +145,7 @@ var handle = {
       .then(response => {
         state.item = response;
         render.detail(state);
-        state.view = 'detail';
+        state.view = 'search';
         render.page(state);
       }).catch(err => {
         state.error = err;
