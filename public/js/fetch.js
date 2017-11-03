@@ -135,15 +135,16 @@ var api = {
     }).then(normalizeResponseErrors)
       .then(res => res.json());
   },
-  remove: function (id, token) {
-    const url = buildUrl(`${USERS_URL}${id}`);
+  remove: function (userId, bookId, token) {
+    const url = buildUrl(`${USERS_URL}${userId}`);
 
     return fetch(url, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json'
-      }
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }, body: JSON.stringify({userId, bookId})
     }).then(normalizeResponseErrors)
       .then(res => res.text());
   }

@@ -42,11 +42,11 @@ var render = {
       const bookTitle = item.items[0].volumeInfo.title;
       const bookDescription = item.items[0].volumeInfo.description;
       console.log(item.items[0].volumeInfo.title);
-      
-      return `<li>
+      const bookId = item.items[0].id;
+      return `<li id="remove" data-bookId="${bookId}">
                 <a href="#" class="detail">Title: ${bookTitle}</a><br>
                 <a href="#" class="detail">Description: ${bookDescription}</a><br>
-                <a href="#" id="remove" class="remove">X</a><br>
+                <a href=""   class="remove">X</a><br>
               </li>`;
     });
     $('#dashboardBooks').empty().append('<ul>').find('ul').append(listItems);

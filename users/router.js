@@ -119,6 +119,7 @@ router.put('/:id', (req, res) => {
     });
 });
 router.delete('/:id', (req, res) => {
+  console.log(req.body);
   User.update({'_id':req.params.id}, {$pull:{bookIds: req.body.bookId}},
     function(err) {
       if(err){

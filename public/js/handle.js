@@ -134,12 +134,11 @@ var handle = {
         console.error('ERROR:', err);
       });
   },
-  details: function (event) {
-    event.preventDefault();
+  details: function (event) {        event.preventDefault();
     const state = event.data;
     const el = $(event.target);
     const id = el.closest('li').attr('id');
-    const userId = state.userId;
+    const userId = state.userId;    
     console.log('UserID: ', userId, 'BookID: ', id);
     api.details(userId, id)
       .then(response => {
@@ -173,16 +172,17 @@ var handle = {
   remove: function (event) {
     event.preventDefault();
     const state = event.data;
-    const id = $(event.target).closest('li').attr('id');
-
-    api.remove(id, state.token)
+    const el = $(event.target);
+    const bookId = el.closest('li').attr('data-bookId');
+    const userId = localStorage.getItem('userId');
+    api.remove(userId, bookId,  state.token)
       .then(() => {
         state.list = null;
-        return handle.remove(event);
+        return handle.viewDashboard(event);
       }).catch(err => {
         if (err.status === 401) {
           state.backTo = state.view;
-          state.view = 'dashboard';
+          state.view = 'register';
           render.page(state);
         }
         console.error('ERROR:', err);
